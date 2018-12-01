@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CamControl.cs" />
     <Compile Include="Assets\Scripts\PlayerMovementControl.cs" />
+    <Compile Include="Assets\Scripts\StatueControl.cs" />
+    <Compile Include="Assets\Scripts\VisionCast.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/danil/Desktop/WGA/Horror/TopDown/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
