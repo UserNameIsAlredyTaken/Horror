@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="CamControl.cs" t="Include" />
+          <e p="FollowPlayer.cs" t="Include" />
           <e p="PlayerMovementControl.cs" t="Include" />
           <e p="StatueControl.cs" t="Include" />
           <e p="VisionCast.cs" t="Include" />

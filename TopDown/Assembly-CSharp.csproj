@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CamControl.cs" />
+    <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerMovementControl.cs" />
     <Compile Include="Assets\Scripts\StatueControl.cs" />
     <Compile Include="Assets\Scripts\VisionCast.cs" />
