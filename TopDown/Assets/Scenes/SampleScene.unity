@@ -487,6 +487,32 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212039788581670322, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 331984221816242588, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 76dfa715b56592d4ebb4a94a993a9cbb,
+        type: 3}
+    - target: {fileID: 114531234005672518, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: backwardSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531234005672518, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: speedCoef
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114531234005672518, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68c12bad47fe994abbdf7b8291d761e, type: 2}
   m_IsPrefabAsset: 0
