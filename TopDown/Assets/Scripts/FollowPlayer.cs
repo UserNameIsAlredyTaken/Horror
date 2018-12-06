@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-
-	public GameObject player;
-	public Collider2D vision;
-	public float speed;
+	[SerializeField]
+	private GameObject _player;
+	[SerializeField]
+	private Collider2D _vision;
+	[SerializeField]
+	private float _speed;
 
 	void FixedUpdate () {
-		if (!Physics2D.IsTouching(GetComponent<Collider2D>(), vision))
+		if (!Physics2D.IsTouching(GetComponent<Collider2D>(), _vision))
 		{
-			transform.Translate((player.transform.position - transform.position) * speed * Time.deltaTime);
+			transform.Translate((_player.transform.position - transform.position) * _speed * Time.deltaTime);
 		}
 	}
 }

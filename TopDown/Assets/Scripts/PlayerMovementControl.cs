@@ -5,22 +5,24 @@ using UnityEngine;
 public class PlayerMovementControl : MonoBehaviour
 {
 	//more this value, less difference between forward speed and backward speed (1 is the minimal value, with which backward speed equals 0)
-	public float speedCoef = 1;
-	public float speed;
+	[SerializeField]
+	private float _speedCoeficent = 1;
+	[SerializeField]
+	private float _speed;
 
-	private Rigidbody2D thisRigidbody;
-	private float forwardInput;
-	private float sidwardInput;
+	private Rigidbody2D _thisRigidbody;
+	private float _forwardInput;
+	private float _sidwardInput;
 
 	private void Awake()
 	{
-		thisRigidbody = GetComponent<Rigidbody2D>();
+		_thisRigidbody = GetComponent<Rigidbody2D>();
 	}
 
 	private void FixedUpdate()
 	{
-		forwardInput = Input.GetAxis("Vertical");
-		sidwardInput = Input.GetAxis("Horizontal");
+		_forwardInput = Input.GetAxis("Vertical");
+		_sidwardInput = Input.GetAxis("Horizontal");
 		LookOnTheCursor();
 		Move();
 	}
@@ -35,8 +37,8 @@ public class PlayerMovementControl : MonoBehaviour
 
 	private void Move()
 	{
-		Vector2 movmentDirection = Vector2.up * forwardInput + Vector2.right * sidwardInput; //finding direction of movement
-		Vector2 movmentAmount = (Vector2.Dot(movmentDirection, transform.up) + speedCoef) * speed * movmentDirection * Time.deltaTime; //using  different speeds whether we go forward or backward //		
-		thisRigidbody.MovePosition(thisRigidbody.position + movmentAmount);//apply movement
+		Vector2 movmentDirection = Vector2.up * _forwardInput + Vector2.right * _sidwardInput; //finding direction of movement
+		Vector2 movmentAmount = (Vector2.Dot(movmentDirection, transform.up) + _speedCoeficent) * _speed * movmentDirection * Time.deltaTime; //using  different speeds whether we go forward or backward //		
+		_thisRigidbody.MovePosition(_thisRigidbody.position + movmentAmount);//apply movement
 	}
 }
