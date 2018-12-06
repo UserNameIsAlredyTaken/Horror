@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &38432485
 Transform:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!4 &47526057
 Transform:
@@ -401,6 +401,10 @@ Prefab:
     - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
@@ -589,7 +593,7 @@ Prefab:
     - target: {fileID: 212102244706838596, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
       propertyPath: m_MaskInteraction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
@@ -623,7 +627,7 @@ Prefab:
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
       propertyPath: m_Layer
@@ -799,6 +803,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
   m_IsPrefabAsset: 0
@@ -958,7 +966,7 @@ Prefab:
     - target: {fileID: 212102244706838596, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
       propertyPath: m_MaskInteraction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
@@ -978,7 +986,7 @@ Prefab:
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
       propertyPath: m_Layer
@@ -1272,6 +1280,16 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8bf92c3265a7ad448b7a53613f94e998, type: 2}
+    - target: {fileID: 60010620272540296, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114451331865143092, guid: c68c12bad47fe994abbdf7b8291d761e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68c12bad47fe994abbdf7b8291d761e, type: 2}
   m_IsPrefabAsset: 0
@@ -1366,7 +1384,7 @@ Prefab:
     - target: {fileID: 212102244706838596, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
       propertyPath: m_MaskInteraction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
@@ -1400,7 +1418,7 @@ Prefab:
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
       propertyPath: m_Layer
@@ -1528,7 +1546,7 @@ Prefab:
       objectReference: {fileID: 1440094399}
     - target: {fileID: 1251243080675648, guid: 0387c7897ba07104fa9b27918d28c338, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114067774019838542, guid: 0387c7897ba07104fa9b27918d28c338,
         type: 2}
