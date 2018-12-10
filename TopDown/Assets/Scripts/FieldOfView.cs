@@ -23,6 +23,7 @@ public class FieldOfView : MonoBehaviour
 	private int _edgeResolveIterations; //how many steps we spend to find an edge of an obstacle
 	[SerializeField]
 	private float _edgeDistanceThreshold; //what distance between 2 hit points will be considered as hitting 2 different objects
+	
 	[SerializeField]
 	private MeshFilter _viewMashFilter;
 	private Mesh _viewMesh;
@@ -105,6 +106,7 @@ public class FieldOfView : MonoBehaviour
 		vertices[0] = Vector2.zero; //since the mash is players child
 		for (int i = 0; i < vertexCount - 1; i++)
 		{
+			//by adding forward * _maskCutawayDst we making the vision longer, which creates visible edges on obstacles 
 			vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
 
 			if (i < vertexCount - 2)

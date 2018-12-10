@@ -19,8 +19,9 @@
           <e p="SortingLayerExposed.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
+          <e p="InEditorSpriteStencilMask.shader" t="Include" />
           <e p="StencilMask.shader" t="Include" />
-          <e p="StencilObject.shader" t="Include" />
+          <e p="StencilSpriteObject.shader" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

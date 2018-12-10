@@ -62,7 +62,8 @@
     <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerMovementControl.cs" />
     <Compile Include="Assets\Scripts\SortingLayerExposed.cs" />
-    <None Include="Assets\Shaders\StencilObject.shader" />
+    <None Include="Assets\Shaders\InEditorSpriteStencilMask.shader" />
+    <None Include="Assets\Shaders\StencilSpriteObject.shader" />
     <None Include="Assets\Shaders\StencilMask.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/danil/Desktop/WGA/Horror/TopDown/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
