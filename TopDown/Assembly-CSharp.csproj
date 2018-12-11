@@ -59,9 +59,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CamControl.cs" />
     <Compile Include="Assets\Scripts\FieldOfView.cs" />
-    <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerMovementControl.cs" />
     <Compile Include="Assets\Scripts\SortingLayerExposed.cs" />
+    <Compile Include="Assets\Scripts\StatueMovementControl.cs" />
+    <Compile Include="Assets\Scripts\StatueSearching.cs" />
     <None Include="Assets\Shaders\InEditorSpriteStencilMask.shader" />
     <None Include="Assets\Shaders\StencilSpriteObject.shader" />
     <None Include="Assets\Shaders\StencilMask.shader" />

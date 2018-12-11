@@ -14,9 +14,10 @@
         <e p="Scripts" t="Include">
           <e p="CamControl.cs" t="Include" />
           <e p="FieldOfView.cs" t="Include" />
-          <e p="FollowPlayer.cs" t="Include" />
           <e p="PlayerMovementControl.cs" t="Include" />
           <e p="SortingLayerExposed.cs" t="Include" />
+          <e p="StatueMovementControl.cs" t="Include" />
+          <e p="StatueSearching.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
           <e p="InEditorSpriteStencilMask.shader" t="Include" />

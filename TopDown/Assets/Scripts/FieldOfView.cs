@@ -32,16 +32,6 @@ public class FieldOfView : MonoBehaviour
 	{
 		_viewMesh = new Mesh {name = "View Mesh"};
 		_viewMashFilter.mesh = _viewMesh;
-		StartCoroutine("FindEnemiesWithDelay", .2f);
-	}
-
-	IEnumerator FindEnemiesWithDelay(float delay)
-	{
-		while (true)
-		{
-			yield return new WaitForSeconds(delay);
-			FindVisibleEnemies();
-		}
 	}
 
 	private void LateUpdate()
@@ -49,7 +39,7 @@ public class FieldOfView : MonoBehaviour
 		DrawFieldOfView();
 	}
 
-	private void FindVisibleEnemies()
+	public void FindVisibleEnemies()
 	{
 		_visibleEnemies.Clear();
 		Collider2D[] enemiesInViewRadius = Physics2D.OverlapCircleAll(transform.position, _viewRadius, _enemyMask); //find all enemies in our view radius
