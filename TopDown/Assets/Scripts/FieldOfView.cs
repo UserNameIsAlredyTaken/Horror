@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
+	private const int DEG_IN_CIRCLE = 360;
+	
 	[SerializeField]
-	public float _viewRadius;
+	public float _closeViewRadius;
+	[SerializeField]
+	public float _farViewRadius;
 	[SerializeField]
 	[Range(0, 360)]
 	public float _viewAngle;
@@ -42,8 +46,8 @@ public class FieldOfView : MonoBehaviour
 	public void FindVisibleEnemies()
 	{
 		_visibleEnemies.Clear();
-		Collider2D[] enemiesInViewRadius = Physics2D.OverlapCircleAll(transform.position, _viewRadius, _enemyMask); //find all enemies in our view radius
-		foreach (var enemyInView in enemiesInViewRadius)
+		Collider2D[] enemiesInFarViewRadius = Physics2D.OverlapCircleAll(transform.position, _farViewRadius, _enemyMask); //find all enemies in our far view radius
+		foreach (var enemyInView in enemiesInFarViewRadius)
 		{
 			Transform enemy = enemyInView.transform;
 			Vector2 dirToEnemy = (enemy.position - transform.position).normalized; //find direction to the enemy
@@ -56,38 +60,28 @@ public class FieldOfView : MonoBehaviour
 				}
 			}
 		}
+		
+		Collider2D[] enemiesInCloseViewRadius = Physics2D.OverlapCircleAll(transform.position, _closeViewRadius, _enemyMask); //find all enemies in our clse view radius
+		foreach (var enemyInView in enemiesInCloseViewRadius)
+		{
+			Transform enemy = enemyInView.transform;
+			Vector2 dirToEnemy = (enemy.position - transform.position).normalized; //find direction to the enemy
+			if (Vector2.Angle(-transform.up, dirToEnemy) < (360 -_viewAngle) / 2) //check if it is in our view angle
+			{
+				float dstToEnemy = Vector2.Distance(transform.position, enemy.position); //find distance to the enemy
+				if (!Physics2D.Raycast(transform.position, dirToEnemy, dstToEnemy, _obstacleMask)) //check is it is not covered by an obstacle
+				{
+					_visibleEnemies.Add(enemy);
+				}
+			}
+		}
 	}
 
 	private void DrawFieldOfView() //drawing the mash representing field of view
 	{
-		int stepCount = Mathf.RoundToInt(_viewAngle * _meshResolution);
-		float stepAngleSize = _viewAngle / stepCount; //how many degrees will by in each step
 		List<Vector3> viewPoints = new List<Vector3>();
-		ViewCastInfo oldViewCast = new ViewCastInfo();
-		
-		for (int i = 0; i <= stepCount; i++)
-		{
-			float angle = -transform.eulerAngles.z - _viewAngle / 2 + stepAngleSize * i; //defining current angle
-			ViewCastInfo newViewCast = ViewCast(angle);
-
-			if (i > 0
-			    && (oldViewCast.hit != newViewCast.hit //if previous ray hits an obstacle and this ray doesn't (or vice versa)...
-			        || Mathf.Abs(oldViewCast.dst - newViewCast.dst) > _edgeDistanceThreshold)) //...or _edgeDistanceThreshold is exceeded find edge point
-			{
-				EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
-				if (edge.pointA != Vector3.zero) //add both points if their values is not default
-				{
-					viewPoints.Add(edge.pointA);
-				}
-				if (edge.pointA != Vector3.zero)
-				{
-					viewPoints.Add(edge.pointA);
-				}
-			}
-			
-			viewPoints.Add(newViewCast.point); //defining list of all points of vision edge
-			oldViewCast = newViewCast; //saving previous ViewCastIfo
-		}
+		GetFarViewPoints(viewPoints);
+		GetCloseViewPoints(viewPoints);
 
 		int vertexCount = viewPoints.Count + 1; //number of vertices for drawing mesh
 		Vector3[] vertices = new Vector3[vertexCount]; //all vertex 
@@ -113,6 +107,69 @@ public class FieldOfView : MonoBehaviour
 		_viewMesh.RecalculateNormals();
 	}
 
+	private void GetFarViewPoints(List<Vector3> viewPoints) //add in list all view point from vision cone
+	{
+		ViewCastInfo oldViewCast = new ViewCastInfo();
+		
+		int stepCount = Mathf.RoundToInt(_viewAngle * _meshResolution);
+		float stepAngleSize = _viewAngle / stepCount; //how many degrees will by in each step
+		for (int i = 0; i <= stepCount; i++)
+		{
+			float angle = -transform.eulerAngles.z - _viewAngle / 2 + stepAngleSize * i; //defining current angle
+			ViewCastInfo newViewCast = ViewCast(angle, _farViewRadius);
+
+			if (i > 0
+			    && (oldViewCast.hit != newViewCast.hit //if previous ray hits an obstacle and this ray doesn't (or vice versa)...
+			        || Mathf.Abs(oldViewCast.dst - newViewCast.dst) > _edgeDistanceThreshold)) //...or _edgeDistanceThreshold is exceeded find edge point
+			{
+				EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
+				if (edge.pointA != Vector3.zero) //add both points if their values is not default
+				{
+					viewPoints.Add(edge.pointA);
+				}
+				if (edge.pointA != Vector3.zero)
+				{
+					viewPoints.Add(edge.pointA);
+				}
+			}
+			
+			viewPoints.Add(newViewCast.point); //defining list of all points of vision edge
+			oldViewCast = newViewCast; //saving previous ViewCastIfo
+		}
+	}
+	
+	private void GetCloseViewPoints(List<Vector3> viewPoints) //add in list all view point from close vision
+	{
+		ViewCastInfo oldViewCast = new ViewCastInfo();
+		
+		int stepCount = Mathf.RoundToInt((360 -_viewAngle) * _meshResolution);
+		float stepAngleSize = (360 -_viewAngle) / stepCount; //how many degrees will by in each step
+		for (int i = 0; i <= stepCount; i++)
+		{
+			float angle = -transform.eulerAngles.z + _viewAngle / 2 + stepAngleSize * i; //defining current angle
+			ViewCastInfo newViewCast = ViewCast(angle, _closeViewRadius);
+
+			if (i > 0
+			    && (oldViewCast.hit != newViewCast.hit //if previous ray hits an obstacle and this ray doesn't (or vice versa)...
+			        || Mathf.Abs(oldViewCast.dst - newViewCast.dst) > _edgeDistanceThreshold)) //...or _edgeDistanceThreshold is exceeded find edge point
+			{
+				EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
+				if (edge.pointA != Vector3.zero) //add both points if their values is not default
+				{
+					viewPoints.Add(edge.pointA);
+				}
+				if (edge.pointA != Vector3.zero)
+				{
+					viewPoints.Add(edge.pointA);
+				}
+			}
+			
+			viewPoints.Add(newViewCast.point); //defining list of all points of vision edge
+			oldViewCast = newViewCast; //saving previous ViewCastIfo
+		}
+	}
+	
+
 	private EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)
 	{
 		float minAngle = minViewCast.angle;
@@ -123,7 +180,7 @@ public class FieldOfView : MonoBehaviour
 		for (int i = 0; i < _edgeResolveIterations; i++)
 		{
 			float angle = (minAngle + maxAngle) / 2; //find angle between min and max
-			ViewCastInfo newViewCast = ViewCast(angle); //cast ray with new angle
+			ViewCastInfo newViewCast = ViewCast(angle, _farViewRadius); //cast ray with new angle
 			//reconfigure min or max angles
 			if (newViewCast.hit == minViewCast.hit && 
 			    !(Mathf.Abs(minViewCast.dst - newViewCast.dst) > _edgeDistanceThreshold))
@@ -141,10 +198,10 @@ public class FieldOfView : MonoBehaviour
 		return new EdgeInfo(minPoint, maxPoint);
 	}
 
-	private ViewCastInfo ViewCast(float globalAngle) //cast ray and collect info about hit
+	private ViewCastInfo ViewCast(float globalAngle, float viewRadius) //cast ray and collect info about hit
 	{
 		Vector2 dir = DirFromAngle(globalAngle, true);
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, _viewRadius, _obstacleMask); //cast ray
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, viewRadius, _obstacleMask); //cast ray
 		
 		if (hit) //if ray hit an obstacle
 		{
@@ -152,7 +209,7 @@ public class FieldOfView : MonoBehaviour
 		} 
 		else //if ray did not hit an obstacle
 		{
-			return new ViewCastInfo (false, transform.position + (Vector3)dir * _viewRadius, _viewRadius, globalAngle);
+			return new ViewCastInfo (false, transform.position + (Vector3)dir * viewRadius, viewRadius, globalAngle);
 		}
 	}
 
